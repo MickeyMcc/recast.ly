@@ -11,13 +11,10 @@ class App extends React.Component {
     };
   }
   
-  
   onListItemClick(newVid) {
-    console.log('title click');
     this.setState({
-      currentVideo: newVid // somehow figure out which one we just clicked
+      currentVideo: newVid 
     });
-    // also rerender videoplayer w/ new current video
   }
   
 
@@ -25,7 +22,7 @@ class App extends React.Component {
     return (<div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><h5><em>search</em> view goes here</h5></div>
+          <div><Search /></div>
         </div>
       </nav>
       <div className="row">
@@ -33,7 +30,7 @@ class App extends React.Component {
           <div><VideoPlayer video={this.state.currentVideo}/></div>
         </div>
         <div className="col-md-5">
-          <div> <VideoList videos={this.state.allVideos} clickFunction = {() => this.onListItemClick} /> </div>
+          <div> <VideoList videos={this.state.allVideos} clickFunction = {this.onListItemClick.bind(this)} /> </div>
         </div>
       </div>
     </div>);
