@@ -3,8 +3,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     
-    this.state = {};
+    this.state = {
+      
+      allVideos: exampleVideoData,
+      currentVideo: exampleVideoData[0]
+
+    };
   }
+  
+  
+  onListItemClick(newVid) {
+    console.log('title click');
+    this.setState({
+      currentVideo: newVid // somehow figure out which one we just clicked
+    });
+    // also rerender videoplayer w/ new current video
+  }
+  
 
   render() {
     return (<div>
@@ -15,10 +30,10 @@ class App extends React.Component {
       </nav>
       <div className="row">
         <div className="col-md-7">
-          <div><VideoPlayer video={exampleVideoData[0]}/></div>
+          <div><VideoPlayer video={this.state.currentVideo}/></div>
         </div>
         <div className="col-md-5">
-          <div> <VideoList videos={exampleVideoData} /> </div>
+          <div> <VideoList videos={this.state.allVideos} clickFunction = {() => this.onListItemClick} /> </div>
         </div>
       </div>
     </div>);
