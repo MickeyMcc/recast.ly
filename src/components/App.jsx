@@ -4,10 +4,8 @@ class App extends React.Component {
     super(props);
     
     this.state = {
-      
       allVideos: exampleVideoData,
       currentVideo: exampleVideoData[0]
-
     };
   }
   
@@ -17,12 +15,32 @@ class App extends React.Component {
     });
   }
   
+  handleNewSeach(newVids) {
+    this.setState({
+      allVideos: newVids,
+      currentVideo: newVids[0]
+    });
+  }
+  
+  properFetch(query) {
+    this.props.searchTheThing({
+      key: YOUTUBE_API_KEY,
+      max: 7,
+      query: query
+    }, this.handleNewSeach.bind(this)
+    );
+  }
+  
+  componentDidMount() {
+    console.log('mounted');
+    this.properFetch('cats');
+  }
 
   render() {
     return (<div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><Search /></div>
+          <div><Search searchTheThing = {this.properFetch.bind(this)}/></div>
         </div>
       </nav>
       <div className="row">
@@ -30,7 +48,8 @@ class App extends React.Component {
           <div><VideoPlayer video={this.state.currentVideo}/></div>
         </div>
         <div className="col-md-5">
-          <div> <VideoList videos={this.state.allVideos} clickFunction = {this.onListItemClick.bind(this)} /> </div>
+          <div> <VideoList videos={this.state.allVideos} 
+            clickFunction = {this.onListItemClick.bind(this)} /> </div>
         </div>
       </div>
     </div>);
