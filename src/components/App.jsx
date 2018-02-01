@@ -16,6 +16,7 @@ class App extends React.Component {
   }
   
   handleNewSeach(newVids) {
+    console.log('???');
     this.setState({
       allVideos: newVids,
       currentVideo: newVids[0]

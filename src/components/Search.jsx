@@ -2,21 +2,17 @@ class Search extends React.Component {
   
   constructor(props) {
     super(props);
-    
     this.state = {
-      value: 'cats'
     };
   }
   
   render() {
-    return <div className="search-bar form-inline"
-        value={this.state.value} 
-        onChange = {this.props.searchTheThing(this.value)}>
+    return <div className="search-bar form-inline" onKeyPress = {() => this.props.searchTheThing($('.form-control').val())}>
       <input className="form-control" type="text"/>
-      <button className="btn hidden-sm-down">
+      <button className="btn hidden-sm-down" onClick = {() => this.props.searchTheThing($('.form-control').val())}>
         <span className="glyphicon glyphicon-search"></span>
       </button>
-    </div>; 
+    </div>;
   }
 }
 
